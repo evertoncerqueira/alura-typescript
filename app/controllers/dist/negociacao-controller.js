@@ -9,8 +9,22 @@ var NegociacaoController = /** @class */ (function () {
         this.inputValor = document.querySelector('#valor');
     }
     NegociacaoController.prototype.adiciona = function () {
-        var negociacao = new negociacao_js_1.Negociacao(this.inputData.value, this.inputQuantidade.value, this.inputValor.value);
+        var negociacao = this.criaNegociacao();
         console.log(negociacao);
+        this.limparFormulario();
+    };
+    NegociacaoController.prototype.criaNegociacao = function () {
+        var exp = /-/g;
+        var date = new Date(this.inputData.value.replace(exp, ','));
+        var quantidade = parseInt(this.inputQuantidade.value);
+        var valor = parseFloat(this.inputValor.value);
+        return new negociacao_js_1.Negociacao(date, quantidade, valor);
+    };
+    NegociacaoController.prototype.limparFormulario = function () {
+        this.inputData.value = '';
+        this.inputQuantidade.value = '';
+        this.inputValor.value = '';
+        this.inputData.focus();
     };
     return NegociacaoController;
 }());
