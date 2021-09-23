@@ -3,17 +3,20 @@ exports.__esModule = true;
 exports.NegociacaoController = void 0;
 var negociacao_js_1 = require("../models/negociacao.js");
 var negociacoes_js_1 = require("../models/negociacoes.js");
+var negociacoes_view_js_1 = require("../views/negociacoes-view.js");
 var NegociacaoController = /** @class */ (function () {
     function NegociacaoController() {
         this.negociacoes = new negociacoes_js_1.Negociacoes();
+        this.negociacoesView = new negociacoes_view_js_1.NegociacoesView('#negociacoesView');
         this.inputData = document.querySelector('#data');
         this.inputQuantidade = document.querySelector('#quantidade');
         this.inputValor = document.querySelector('#valor');
+        this.negociacoesView.update(this.negociacoes);
     }
     NegociacaoController.prototype.adiciona = function () {
         var negociacao = this.criaNegociacao();
         this.negociacoes.adiciona(negociacao);
-        console.log(this.negociacoes.lista());
+        this.negociacoesView.update(this.negociacoes);
         this.limparFormulario();
     };
     NegociacaoController.prototype.criaNegociacao = function () {
